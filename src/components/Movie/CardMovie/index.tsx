@@ -1,10 +1,9 @@
 import { useConfigurationContext } from "@/utils/context/configurationContext";
 import { MovieDetail } from "@/utils/fetcher/movie";
-import { Box, Flex, Icon, Image, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 type Props = {
   movie: MovieDetail;
