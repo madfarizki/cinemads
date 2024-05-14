@@ -10,6 +10,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/components": path.resolve(dirName, "src/components/"),
+      "@/consts": path.resolve(dirName, "src/consts/"),
+      "@/utils": path.resolve(dirName, "src/utils/"),
+      "@/types": path.resolve(dirName, "src/types/"),
     },
   },
   server: {

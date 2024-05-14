@@ -1,61 +1,17 @@
 import { CardMovie } from "@/components/index";
+import { useFetchAllPopular, useFetchAllTopRated } from "@/utils/api/useMovie";
 import { Box, Container, Text } from "@chakra-ui/react";
+import { useMemo } from "react";
 import Slider from "react-slick";
-
-const movies = [
-  {
-    id: 1,
-    title: "Movie 1",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 2,
-    title: "Movie 2",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 3,
-    title: "Movie 3",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 4,
-    title: "Movie 4",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 5,
-    title: "Movie 5",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 1,
-    title: "Movie 1",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 2,
-    title: "Movie 2",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 3,
-    title: "Movie 3",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 4,
-    title: "Movie 4",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-  {
-    id: 5,
-    title: "Movie 5",
-    imageUrl: "https://image.tmdb.org/t/p/original/e1J2oNzSBdou01sUvriVuoYp0pJ.jpg",
-  },
-];
+import Trending from "./Trending";
 
 function Movie() {
+  const { data: popularData } = useFetchAllPopular("movie");
+  const { data: topRatedData } = useFetchAllTopRated("movie");
+
+  const allPopular = useMemo(() => popularData?.data?.results, [popularData]);
+  const allTopRated = useMemo(() => topRatedData?.data?.results, [topRatedData]);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -67,13 +23,24 @@ function Movie() {
   };
 
   return (
-    <Container maxW="container.xl">
-      <Box mb={8}>
+    <Container maxW="container.xl" display="flex" flexDirection="column" gap={24}>
+      <Trending settings={settings} />
+      <Box>
         <Text fontSize="3xl" fontWeight="bold" mb={4}>
-          Trending
+          Popular
         </Text>
         <Slider {...settings}>
-          {movies.map((movie) => (
+          {allPopular?.map((movie) => (
+            <CardMovie key={movie.id} movie={movie} />
+          ))}
+        </Slider>
+      </Box>
+      <Box>
+        <Text fontSize="3xl" fontWeight="bold" mb={4}>
+          Top Rated
+        </Text>
+        <Slider {...settings}>
+          {allTopRated?.map((movie) => (
             <CardMovie key={movie.id} movie={movie} />
           ))}
         </Slider>

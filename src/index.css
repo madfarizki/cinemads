@@ -13,3 +13,10 @@ body {
   font-size: 14px;
   font-weight: normal;
 }
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
+}
