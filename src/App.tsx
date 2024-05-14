@@ -1,7 +1,7 @@
-import { Text } from "@chakra-ui/react";
+import Router from "./routes/routes";
 
 function App() {
-  return <Text fontSize="lg">Hello World</Text>;
+  return <Router />;
 }
 
 export default App;
