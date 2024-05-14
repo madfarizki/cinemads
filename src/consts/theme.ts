@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 import "@fontsource/montserrat";
 
 const themes = {
@@ -13,6 +14,13 @@ const themes = {
   fonts: {
     heading: `'Montserrat', sans-serif`,
     body: `'Montserrat', sans-serif`,
+  },
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: mode("#fffff", "#04152d")(props),
+      },
+    }),
   },
 };
 

@@ -5,7 +5,7 @@ function Layouts({ children }: { children: React.ReactNode }) {
   return (
     <Flex direction="column" minH="100vh">
       <Header />
-      <Flex flex="1" justify="center" align="center">
+      <Flex flex="1" direction="column" justify="center" align="center" gap={24}>
         {children}
       </Flex>
     </Flex>

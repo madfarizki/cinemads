@@ -4,6 +4,8 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import App from "./App.tsx";
 import "./index.css";
 import theme from "./consts/theme.ts";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
