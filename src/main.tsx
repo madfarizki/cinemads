@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ConfigurationProvider } from "@/utils/context/configurationContext.tsx";
+import { BookmarkProvider } from "@/utils/context/bookmarkContext.tsx";
 import App from "./App.tsx";
 import "./index.css";
 import theme from "./consts/theme.ts";
@@ -22,10 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ConfigurationProvider>
-        <ChakraProvider theme={theme}>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-          <App />
-        </ChakraProvider>
+        <BookmarkProvider>
+          <ChakraProvider theme={theme}>
+            <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+            <App />
+          </ChakraProvider>
+        </BookmarkProvider>
       </ConfigurationProvider>
     </QueryClientProvider>
   </React.StrictMode>

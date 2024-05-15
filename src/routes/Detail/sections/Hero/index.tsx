@@ -9,11 +9,14 @@ import { useParams } from "react-router-dom";
 import { useMemo } from "react";
 import { CreditResponse, MovieDetailResponse } from "@/utils/fetcher/movie";
 import { useConfigurationContext } from "@/utils/context/configurationContext";
+import { useBookmarkContext } from "@/utils/context/bookmarkContext";
 
 function Hero() {
   const { type, id } = useParams<{ type: string; id: string }>();
 
   const { baseUrl } = useConfigurationContext();
+  const { bookmarks, addBookmark, removeBookmark } = useBookmarkContext();
+
   const { data: movieData } = useMovieById(type, Number(id));
   const { data: creditData } = useMovieCredit(type, Number(id));
 
@@ -23,8 +26,34 @@ function Hero() {
     return castArray?.slice(0, 3);
   }, [creditData]) as CreditResponse[];
 
-  const { title, name, poster_path, vote_average, overview, release_date, genres, popularity } =
-    movieDetail;
+  const {
+    id: movieId,
+    title,
+    name,
+    poster_path,
+    vote_average,
+    overview,
+    release_date,
+    genres,
+    popularity,
+  } = movieDetail;
+
+  const handleBookmark = () => {
+    if (isBookmarked) {
+      removeBookmark(Number(id));
+    } else {
+      addBookmark({
+        id: Number(movieId),
+        poster_path: poster_path,
+        title: title || name,
+        name: name || title,
+        vote_average: vote_average,
+        media_type: type,
+      });
+    }
+  };
+
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.id === Number(id));
 
   return (
     <Container maxW="container.xl" display="flex" flexDirection="column" gap={24} pt={30}>
@@ -70,11 +99,12 @@ function Hero() {
               rounded="3xl"
               size="lg"
               leftIcon={<BsBookmarkHeart />}
-              bg="primary.button"
+              bg={isBookmarked ? "red" : "primary.button"}
               variant="solid"
               color="white"
-              _hover={{ bg: "primary.buttonHover" }}>
-              Watch Later
+              _hover={{ bg: "primary.buttonHover" }}
+              onClick={handleBookmark}>
+              {isBookmarked ? "Remove from Watch Later" : "Watch Later"}
             </Button>
           </Stack>
           <Box mt={8}>
