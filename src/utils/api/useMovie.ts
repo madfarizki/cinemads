@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  exploreMovie,
   fetchAllMovieTranding,
   fetchAllPopular,
   fetchAllTopRated,
+  fetchGenre,
   fetchMovieById,
   fetchMovieCredit,
   searchMovie,
@@ -32,6 +34,14 @@ function useSearchMovie(params = {}) {
   return useQuery(["search", params], () => searchMovie(params));
 }
 
+function useExplore(type: string, params = {}) {
+  return useQuery(["explore", type, params], () => exploreMovie(type, params));
+}
+
+function useFetchAllGenre(type: string) {
+  return useQuery(["genre", type], () => fetchGenre(type));
+}
+
 export {
   useFetchAllMovieTranding,
   useFetchAllPopular,
@@ -39,4 +49,6 @@ export {
   useMovieById,
   useMovieCredit,
   useSearchMovie,
+  useExplore,
+  useFetchAllGenre,
 };

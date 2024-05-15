@@ -3,6 +3,7 @@ import Home from "./Home";
 import Detail from "./Detail";
 import Saved from "./Saved";
 import Search from "./Search";
+import Explore from "./Explore";
 
 function Router() {
   return (
@@ -10,6 +11,7 @@ function Router() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/search/:query" component={Search} />
+        <Route path="/explore/:type" component={Explore} />
         <Route path="/:type/:id" component={Detail} />
         <Route path="/saved" component={Saved} />
       </Switch>

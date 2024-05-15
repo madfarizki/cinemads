@@ -5,6 +5,8 @@ import {
   API_MOVIE_DETAIL,
   API_MOVIE_CREDIT,
   API_SEARCH,
+  API_EXPLORE,
+  API_GENRE,
 } from "@/consts/api";
 import request from "../request";
 
@@ -76,6 +78,10 @@ export type SearchResponse = {
   total_results: number;
 };
 
+export type GenreResponse = {
+  genres: { id: number; name: string }[];
+};
+
 export const fetchAllMovieTranding = (timeWindow: string) =>
   request<MovieResponse>({
     url: API_MOVIE_TRENDING(timeWindow),
@@ -105,4 +111,15 @@ export const searchMovie = (params: object) =>
   request<SearchResponse>({
     url: API_SEARCH,
     params,
+  });
+
+export const exploreMovie = (type: string, params: object) =>
+  request<SearchResponse>({
+    url: API_EXPLORE(type),
+    params,
+  });
+
+export const fetchGenre = (type: string) =>
+  request<GenreResponse>({
+    url: API_GENRE(type),
   });

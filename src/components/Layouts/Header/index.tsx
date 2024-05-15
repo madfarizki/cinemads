@@ -18,7 +18,7 @@ function Header() {
       backdropFilter="blur(3.5px)"
       position="fixed"
       zIndex="999">
-      <Container maxW="container.lg">
+      <Container maxW="container.xl">
         <Flex align="center" justify="space-between">
           <Text
             fontSize="3xl"
@@ -29,6 +29,24 @@ function Header() {
             CineMads
           </Text>
           <Flex ml={4}>
+            <Link
+              color="white"
+              mr={4}
+              _hover={{ textDecoration: "none", color: "red" }}
+              onClick={() => history.push("/explore/movie")}>
+              <Text fontSize="xl" fontWeight="semibold">
+                Movies
+              </Text>
+            </Link>
+            <Link
+              color="white"
+              mr={4}
+              _hover={{ textDecoration: "none", color: "red" }}
+              onClick={() => history.push("/explore/tv")}>
+              <Text fontSize="xl" fontWeight="semibold">
+                TV
+              </Text>
+            </Link>
             <Link
               color="white"
               mr={4}
