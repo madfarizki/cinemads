@@ -1,30 +1,62 @@
-# React + TypeScript + Vite
+# Quicks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web application created by Ahmad Alfarizki for job application purposes. The application, called "CineMads," is a platform for exploring movies, featuring various functionalities such as browsing popular movies, trending movies, and more.
 
-Currently, two official plugins are available:
+## Demo [https://cinemads.madfariz.my.id](https://cinemads.madfariz.my.id)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Browse popular, trending, and top-rated movies
+- View detailed information about each movie
+- Search for movies by title
+- Bookmark favorite movies
+- Dark and light mode theme options
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies
 
-- Configure the top-level `parserOptions` property like this:
+- **Language**: JavaScript/TypeScript
+- **Framework**: React
+- **Styling**: Chakra UI for component styling
+- **State Management**: Built-in React hooks (`useState`, `useEffect`)
+- **API Integration**: Axios for making API request
+- **Tooling and Build System**: Vite for fast development and build performance
+- **Package Manager**: npm
+- **Version Control**: Git for version control and GitHub for repository hosting
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Project Setup
+
+To set up the project, follow these instructions:
+
+### Clone the repository
+
+```sh
+git clone https://github.com/madfarizki/cinemads.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Navigate to the project directory
+
+```sh
+cd cinemads
+```
+
+### Install the required dependencies
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+## Thank you
+
+If you encounter any issues or have questions, feel free to reach out to me on [https://madfariz.my.id](https://madfariz.my.id).
