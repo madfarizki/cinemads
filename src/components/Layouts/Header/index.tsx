@@ -29,7 +29,11 @@ function Header() {
             CineMads
           </Text>
           <Flex ml={4}>
-            <Link color="white" mr={4} _hover={{ textDecoration: "none", color: "red" }}>
+            <Link
+              color="white"
+              mr={4}
+              _hover={{ textDecoration: "none", color: "red" }}
+              onClick={() => history.push("/saved")}>
               <Text fontSize="xl" fontWeight="semibold">
                 Saved
               </Text>

@@ -22,14 +22,10 @@ const BookmarkContext = createContext<BookmarkContextType>({
 });
 
 export const BookmarkProvider = ({ children }: { children: React.ReactNode }) => {
-  const [bookmarks, setBookmarks] = useState<MovieBookmark[]>([]);
-
-  useEffect(() => {
+  const [bookmarks, setBookmarks] = useState<MovieBookmark[]>(() => {
     const storedBookmarks = localStorage.getItem("bookmarks");
-    if (storedBookmarks) {
-      setBookmarks(JSON.parse(storedBookmarks));
-    }
-  }, []);
+    return storedBookmarks ? JSON.parse(storedBookmarks) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));

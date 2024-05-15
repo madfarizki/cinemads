@@ -9,7 +9,14 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
 type Props = {
-  movie: MovieDetail;
+  movie: {
+    id: number;
+    title?: string;
+    name?: string;
+    poster_path: string;
+    vote_average: number;
+    media_type: string;
+  };
   loading?: boolean;
 };
 
