@@ -1,5 +1,7 @@
-import { Button, Container, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { Container, Flex, Icon, Link, Text, useColorMode } from "@chakra-ui/react";
 import { useHistory } from "react-router-dom";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+import { FiSun } from "react-icons/fi";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -27,12 +29,24 @@ function Header() {
             CineMads
           </Text>
           <Flex ml={4}>
-            <Button variant="link" color="white" mr={4}>
-              Menu 1
-            </Button>
-            <Button variant="link" color="white" mr={4} onClick={toggleColorMode}>
-              {colorMode}
-            </Button>
+            <Link color="white" mr={4} _hover={{ textDecoration: "none", color: "red" }}>
+              <Text fontSize="xl" fontWeight="semibold">
+                Saved
+              </Text>
+            </Link>
+            <Link
+              color="white"
+              mr={4}
+              _hover={{ textDecoration: "none", color: "red" }}
+              onClick={toggleColorMode}
+              display="flex"
+              gap={2}
+              alignItems="center">
+              <Icon as={colorMode === "dark" ? BsFillMoonStarsFill : FiSun} />
+              <Text fontSize="xl" fontWeight="semibold">
+                {colorMode === "dark" ? "Dark" : "Light"}
+              </Text>
+            </Link>
           </Flex>
         </Flex>
       </Container>
