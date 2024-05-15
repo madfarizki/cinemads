@@ -16,7 +16,7 @@ function Movie() {
   };
 
   return (
-    <Container maxW="container.xl" display="flex" flexDirection="column" gap={24}>
+    <Container maxW="container.xl" display="flex" flexDirection="column" gap={24} mb={24}>
       <Trending settings={settings} />
       <Popular settings={settings} />
       <TopRated settings={settings} />
