@@ -1,4 +1,16 @@
-import { Avatar, Box, Button, Container, HStack, Icon, Stack, Tag, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  HStack,
+  Icon,
+  Skeleton,
+  Stack,
+  Tag,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { BsBookmarkHeart } from "react-icons/bs";
 import { FaStar } from "react-icons/fa";
@@ -17,7 +29,7 @@ function Hero() {
   const { baseUrl } = useConfigurationContext();
   const { bookmarks, addBookmark, removeBookmark } = useBookmarkContext();
 
-  const { data: movieData } = useMovieById(type, Number(id));
+  const { data: movieData, isFetching: isFetchingMovie } = useMovieById(type, Number(id));
   const { data: creditData } = useMovieCredit(type, Number(id));
 
   const movieDetail = useMemo(() => movieData?.data || [], [movieData]) as MovieDetailResponse;
@@ -54,6 +66,24 @@ function Hero() {
   };
 
   const isBookmarked = bookmarks.some((bookmark) => bookmark.id === Number(id));
+
+  if (isFetchingMovie) {
+    return (
+      <Container maxW="container.xl" display="flex" flexDirection="column" gap={24} pt={30}>
+        <HStack alignItems="start" spacing={10}>
+          <Skeleton height="484px" width="340px" rounded="xl" />
+          <VStack gap={6}>
+            <Skeleton height="230px" width="340px" rounded="xl" />
+            <Skeleton height="230px" width="340px" rounded="xl" />
+          </VStack>
+          <VStack gap={6}>
+            <Skeleton height="230px" width="340px" rounded="xl" />
+            <Skeleton height="230px" width="340px" rounded="xl" />
+          </VStack>
+        </HStack>
+      </Container>
+    );
+  }
 
   return (
     <Container maxW="container.xl" display="flex" flexDirection="column" gap={24} pt={30}>

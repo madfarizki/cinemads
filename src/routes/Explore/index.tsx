@@ -1,7 +1,7 @@
 import { CardMovie, Layouts } from "@/components/index";
 import { useExplore, useFetchAllGenre } from "@/utils/api/useMovie";
 import { GenreResponse, SearchResponse } from "@/utils/fetcher/movie";
-import { background, Box, Button, Container, Flex, HStack, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, HStack, Skeleton, Text } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import Select, { StylesConfig } from "react-select";
@@ -44,7 +44,7 @@ function Explore() {
   const [genre, setGenre] = useState(null);
   const [sortby, setSortby] = useState(null);
 
-  const { data: allData } = useExplore(type, {
+  const { data: allData, isFetching } = useExplore(type, {
     page: currentPage,
     ...filters,
   });
@@ -178,19 +178,30 @@ function Explore() {
             </Box>
           </Flex>
         </HStack>
-        <Flex justifyContent="start" alignItems="start" mb={4} rowGap={12} flexWrap="wrap">
-          {movieData?.length ? (
-            movieData?.map((movie) => (
-              <Box key={movie.id} w="250px">
-                <CardMovie movie={movie} type={type} />
-              </Box>
-            ))
-          ) : (
-            <Text fontSize="xl" fontWeight="bold" textAlign="center" w="100%">
-              No movies found!
-            </Text>
-          )}
-        </Flex>
+        {isFetching ? (
+          <Flex justifyContent="center" alignItems="start" mb={4} gap={2} flexWrap="wrap">
+            {Array(15)
+              .fill(undefined)
+              .map((_, idx) => (
+                <Skeleton w="250px" h="380px" rounded="xl" key={idx} />
+              ))}
+          </Flex>
+        ) : (
+          <Flex justifyContent="start" alignItems="start" mb={4} rowGap={12} flexWrap="wrap">
+            {movieData?.length ? (
+              movieData?.map((movie) => (
+                <Box key={movie.id} w="250px">
+                  <CardMovie movie={movie} type={type} />
+                </Box>
+              ))
+            ) : (
+              <Text fontSize="xl" fontWeight="bold" textAlign="center" w="100%">
+                No movies found!
+              </Text>
+            )}
+          </Flex>
+        )}
+
         {movieData.length !== 0 && (
           <Flex justify="center" alignItems="center" mt={12} gap={8}>
             <Button onClick={handlePreviousPage} disabled={currentPage === 1} colorScheme="blue">
