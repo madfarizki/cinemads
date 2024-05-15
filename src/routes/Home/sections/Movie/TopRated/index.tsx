@@ -3,37 +3,37 @@ import { CardMovie, Tabs } from "@/components/index";
 import Slider from "react-slick";
 import { SliderType } from "@/types/slider.type";
 import { useMemo, useState } from "react";
-import { useFetchAllMovieTranding } from "@/utils/api/useMovie";
+import { useFetchAllTopRated } from "@/utils/api/useMovie";
 
 type Props = {
   settings: SliderType;
 };
 
-function Trending({ settings }: Props) {
-  const [time, setTime] = useState("day");
-  const { data: trendingData, isFetching } = useFetchAllMovieTranding(time);
+function TopRated({ settings }: Props) {
+  const [type, setType] = useState("movie");
+  const { data: topRatedData, isFetching } = useFetchAllTopRated(type);
 
-  const allTrending = useMemo(() => trendingData?.data?.results, [trendingData]);
+  const allTrending = useMemo(() => topRatedData?.data?.results, [topRatedData]);
 
   const onTabChange = (tab: string) => {
-    setTime(tab === "Day" ? "day" : "week");
+    setType(tab === "Movie" ? "movie" : "tv");
   };
 
   return (
     <Box>
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Text fontSize="3xl" fontWeight="bold" mb={4} mr={4}>
-          Trending ✨
+          Top Rated 🌟
         </Text>
-        <Tabs data={["Day", "Week"]} onTabChange={onTabChange} />
+        <Tabs data={["Movie", "TV"]} onTabChange={onTabChange} />
       </Box>
       <Slider {...settings}>
         {allTrending?.map((movie) => (
-          <CardMovie key={movie.id} movie={movie} loading={isFetching} />
+          <CardMovie key={movie.id} movie={movie} loading={isFetching} type={type} />
         ))}
       </Slider>
     </Box>
   );
 }
 
-export default Trending;
+export default TopRated;

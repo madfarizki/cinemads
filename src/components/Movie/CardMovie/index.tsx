@@ -18,10 +18,11 @@ type Props = {
     media_type: string;
   };
   loading?: boolean;
+  type?: string;
 };
 
 function CardMovie(props: Props) {
-  const { movie, loading } = props;
+  const { movie, loading, type } = props;
   const { id, title, name, poster_path, vote_average, media_type } = movie;
 
   const { baseUrl } = useConfigurationContext();
@@ -38,7 +39,7 @@ function CardMovie(props: Props) {
         title: title || name,
         name: name || title,
         vote_average: vote_average,
-        media_type: media_type,
+        media_type: media_type || type || "",
       });
     }
   };
@@ -77,7 +78,9 @@ function CardMovie(props: Props) {
           boxSize={5}
         />
       </Box>
-      <Box _hover={{ cursor: "pointer" }} onClick={() => history.push(`/${media_type}/${id}`)}>
+      <Box
+        _hover={{ cursor: "pointer" }}
+        onClick={() => history.push(`/${media_type || type}/${id}`)}>
         <Box h="346px">
           <LazyLoadImage
             src={baseUrl + poster_path}

@@ -17,7 +17,7 @@ function useFetchAllPopular(type: string) {
 }
 
 function useFetchAllTopRated(type: string) {
-  return useQuery(["popular", type], () => fetchAllTopRated(type));
+  return useQuery(["topRated", type], () => fetchAllTopRated(type));
 }
 
 function useMovieById(type: string, id: number) {
