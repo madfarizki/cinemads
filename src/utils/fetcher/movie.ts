@@ -4,6 +4,7 @@ import {
   API_MOVIE_TOP_RATED,
   API_MOVIE_DETAIL,
   API_MOVIE_CREDIT,
+  API_SEARCH,
 } from "@/consts/api";
 import request from "../request";
 
@@ -68,6 +69,13 @@ export type CreditResponse = {
   profile_path: string;
 };
 
+export type SearchResponse = {
+  page: number;
+  results: MovieDetail[];
+  total_pages: number;
+  total_results: number;
+};
+
 export const fetchAllMovieTranding = (timeWindow: string) =>
   request<MovieResponse>({
     url: API_MOVIE_TRENDING(timeWindow),
@@ -91,4 +99,10 @@ export const fetchMovieById = (type: string, id: number) =>
 export const fetchMovieCredit = (type: string, id: number) =>
   request<CreditResponse[]>({
     url: API_MOVIE_CREDIT(type, id),
+  });
+
+export const searchMovie = (params: object) =>
+  request<SearchResponse>({
+    url: API_SEARCH,
+    params,
   });

@@ -5,6 +5,7 @@ import {
   fetchAllTopRated,
   fetchMovieById,
   fetchMovieCredit,
+  searchMovie,
 } from "../fetcher/movie";
 
 function useFetchAllMovieTranding(timeWindow: string) {
@@ -27,10 +28,15 @@ function useMovieCredit(type: string, id: number) {
   return useQuery(["credit", type, id], () => fetchMovieCredit(type, id));
 }
 
+function useSearchMovie(params = {}) {
+  return useQuery(["search", params], () => searchMovie(params));
+}
+
 export {
   useFetchAllMovieTranding,
   useFetchAllPopular,
   useFetchAllTopRated,
   useMovieById,
   useMovieCredit,
+  useSearchMovie,
 };

@@ -7,8 +7,11 @@ function Saved() {
 
   return (
     <Layouts>
-      <Container maxW="container.lg" py={32} px={0}>
-        <Flex justifyContent="start" alignItems="start" mb={4} flexWrap="wrap">
+      <Container maxW="container.xl" py={32} px={0}>
+        <Text fontSize="3xl" fontWeight="bold" mb={8}>
+          Saved Movies
+        </Text>
+        <Flex justifyContent="start" alignItems="start" mb={4} rowGap={12} flexWrap="wrap">
           {bookmarks?.length ? (
             bookmarks?.map((movie) => (
               <Box key={movie.id} w="250px">

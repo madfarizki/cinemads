@@ -1,8 +1,26 @@
 import { Button, Flex, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function Hero() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const history = useHistory();
+
+  const handleSearch = () => {
+    if (searchQuery.trim() !== "") {
+      history.push(`/search/${searchQuery}`);
+    }
+  };
+
+  const searchQueryHandler = (e) => {
+    if (e.key === "Enter" && searchQuery.trim() !== "") {
+      handleSearch();
+    }
+  };
+
   const dynamicBackground =
     "url('https://image.tmdb.org/t/p/original/jTWllMddJzCb7hBVNZICtgKhYM9.jpg')";
+
   return (
     <Flex
       as="section"
@@ -37,15 +55,20 @@ function Hero() {
             border="none"
             outline="none"
             fontSize={["md", "lg", "xl"]}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyUp={searchQueryHandler}
           />
           <InputRightElement height="100%" py={8} width="5rem" borderRightRadius="full">
             <Button
               size="md"
               py={8}
-              bg="red"
+              bg="primary.button"
               color="white"
               borderRightRadius="full"
-              fontSize={["md", "lg", "lg"]}>
+              fontSize={["md", "lg", "lg"]}
+              _hover={{ bg: "primary.buttonHover" }}
+              onClick={handleSearch}>
               Search
             </Button>
           </InputRightElement>
