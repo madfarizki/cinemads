@@ -1,7 +1,9 @@
 import { Button, Container, Flex, Text, useColorMode } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
 function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const history = useHistory();
 
   return (
     <Flex
@@ -16,7 +18,12 @@ function Header() {
       zIndex="999">
       <Container maxW="container.lg">
         <Flex align="center" justify="space-between">
-          <Text fontSize="3xl" fontWeight="bold" color="white">
+          <Text
+            fontSize="3xl"
+            fontWeight="bold"
+            color="white"
+            onClick={() => history.push("/")}
+            _hover={{ cursor: "pointer" }}>
             CineMads
           </Text>
           <Flex ml={4}>

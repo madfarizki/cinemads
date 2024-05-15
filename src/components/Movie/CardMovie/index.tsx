@@ -1,6 +1,7 @@
 import { useConfigurationContext } from "@/utils/context/configurationContext";
 import { MovieDetail } from "@/utils/fetcher/movie";
 import { Box, Flex, Icon, Skeleton, Stack, Text } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { FaStar } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
@@ -12,9 +13,10 @@ type Props = {
 
 function CardMovie(props: Props) {
   const { movie, loading } = props;
-  const { id, title, name, poster_path, vote_average } = movie;
+  const { id, title, name, poster_path, vote_average, media_type } = movie;
 
   const { baseUrl } = useConfigurationContext();
+  const history = useHistory();
 
   if (loading) {
     return (
@@ -39,7 +41,7 @@ function CardMovie(props: Props) {
         rounded="xl">
         <Icon as={FaRegHeart} color="red" boxSize={6} />
       </Box>
-      <Box _hover={{ cursor: "pointer" }}>
+      <Box _hover={{ cursor: "pointer" }} onClick={() => history.push(`/${media_type}/${id}`)}>
         <Box h="346px">
           <LazyLoadImage
             src={baseUrl + poster_path}

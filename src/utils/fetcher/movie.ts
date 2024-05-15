@@ -1,4 +1,10 @@
-import { API_MOVIE_TRENDING, API_MOVIE_POPULARS, API_MOVIE_TOP_RATED } from "@/consts/api";
+import {
+  API_MOVIE_TRENDING,
+  API_MOVIE_POPULARS,
+  API_MOVIE_TOP_RATED,
+  API_MOVIE_DETAIL,
+  API_MOVIE_CREDIT,
+} from "@/consts/api";
 import request from "../request";
 
 export type MovieDetail = {
@@ -17,6 +23,7 @@ export type MovieDetail = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  media_type: string;
 };
 
 export type MovieResponse = {
@@ -24,6 +31,41 @@ export type MovieResponse = {
   results: MovieDetail[];
   total_pages: number;
   total_results: number;
+};
+
+export type MovieDetailResponse = {
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: null | object;
+  budget: number;
+  genres: { id: number; name: string }[];
+  homepage: string;
+  id: number;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  production_companies: { id: number; logo_path: string; name: string; origin_country: string }[];
+  production_countries: { iso_3166_1: string; name: string }[];
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  spoken_languages: { english_name: string; iso_639_1: string; name: string }[];
+  status: string;
+  tagline: string;
+  title?: string;
+  name?: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
+
+export type CreditResponse = {
+  name: string;
+  character: string;
+  profile_path: string;
 };
 
 export const fetchAllMovieTranding = (timeWindow: string) =>
@@ -39,4 +81,14 @@ export const fetchAllPopular = (type: string) =>
 export const fetchAllTopRated = (type: string) =>
   request<MovieResponse>({
     url: API_MOVIE_TOP_RATED(type),
+  });
+
+export const fetchMovieById = (type: string, id: number) =>
+  request<MovieDetailResponse>({
+    url: API_MOVIE_DETAIL(type, id),
+  });
+
+export const fetchMovieCredit = (type: string, id: number) =>
+  request<CreditResponse[]>({
+    url: API_MOVIE_CREDIT(type, id),
   });
