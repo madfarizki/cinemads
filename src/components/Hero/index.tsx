@@ -1,10 +1,27 @@
+import { useFetchAllMovieTranding } from "@/utils/api/useMovie";
+import { useConfigurationContext } from "@/utils/context/configurationContext";
 import { Button, Flex, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 function Hero() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const history = useHistory();
+
+  const { baseUrl } = useConfigurationContext();
+
+  const { data: trendingData } = useFetchAllMovieTranding("week");
+
+  const allTrending = useMemo(() => trendingData?.data?.results, [trendingData]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % (allTrending?.length || 1));
+    }, 15000);
+
+    return () => clearInterval(intervalId);
+  }, [allTrending]);
 
   const handleSearch = () => {
     if (searchQuery.trim() !== "") {
@@ -18,15 +35,17 @@ function Hero() {
     }
   };
 
-  const dynamicBackground =
-    "url('https://image.tmdb.org/t/p/original/jTWllMddJzCb7hBVNZICtgKhYM9.jpg')";
+  const backdropPath = allTrending?.[currentSlideIndex]?.backdrop_path;
+  const dynamicBackground = backdropPath
+    ? `url('${baseUrl}${backdropPath}')`
+    : "url(https://image.tmdb.org/t/p/original/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg)";
 
   return (
     <Flex
       as="section"
       h="100vh"
       w="100%"
-      bgImage={`linear-gradient(to top, rgba(4, 21, 45,0.7), rgba(4, 21, 45,0.4)), ${dynamicBackground}`}
+      bgImage={`linear-gradient(to top, rgba(4, 21, 45,0.9), rgba(4, 21, 45,0.5)), ${dynamicBackground}`}
       bgSize="cover"
       bgPosition="center"
       color="white"

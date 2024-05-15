@@ -17,7 +17,6 @@ function Search() {
   const searchResult = useMemo(() => searchData?.data || [], [searchData]) as SearchResponse;
 
   const movieData = searchResult?.results || [];
-  console.log();
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
