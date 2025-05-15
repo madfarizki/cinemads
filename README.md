@@ -1,6 +1,6 @@
 # Quicks
 
-This project is a web application created by Ahmad Alfarizki for job application purposes. The application, called "CineMads," is a platform for exploring movies, featuring various functionalities such as browsing popular movies, trending movies, and more.
+The application, called "CineMads," is a platform for exploring movies, featuring various functionalities such as browsing popular movies, trending movies, and more.
 
 ## Demo [https://cinemads.madfariz.my.id](https://cinemads.madfariz.my.id)
 
